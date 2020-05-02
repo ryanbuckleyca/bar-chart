@@ -3,56 +3,30 @@
   <head>
     <meta charset="utf-8" />
     <title>Bar Chart lighthouse labs project</title>
-    <link rel="stylesheet" href="assets/stylesheets/main.css" />
+    <link rel="stylesheet" href="main.css" />
+    <script type="text/javascript" src="drawBarChart.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
   </head>
   <body>
-    <header>
-      <h1>
-        <a href="index.html">Header 1</a>
-      </h1>
-      <h3>Header 3</h3>
-
-      <nav>
-        <a href="#">Nav 1</a>
-        <a href="#nav2">Nav 2</a>
-        <a href="#">Nav 3</a>
-        <a href="#">Nav 4</a>
-        <a href="#">Nav 5</a>
-      </nav>
-    </header>
-    <section>
-      <h2>Header 2</h2>
-      <p>Paragraph</p>
-    </section>
-    <section>
-
-      <section>
-        <a name="#nav2">
-          <h5>Header 5</h5>
-          <h3>Header 3</h3>
-        </a>
-        <p>Paragraph.</p>
+      <script type="text/javascript">
+        $(function() {
+          drawBarChart(
+            [[3, 10, 3, 4, 30], ['three', 'ten', 'three', 'four', 'five-hundred']],
+            {"barColor": "blue",
+            "barPosition": "bottom",
+            "barSpacing": "15px",
+            "labelColor": "white",
+            "yAxis": "Y Values",
+            "xAxis": "X Values"},
+            "graphArea"
+          );
+        });
+      </script>
+      <section id="graphArea">
+        <!-- placeholder -->
       </section>
-      <section>
-
-        <a href="register.html">Register Now</a>
-
-      </section>
-
-
-    </section>
     <footer>
-      <nav>
-        <a href="#">Nav 1</a>
-        <a href="#nav2">Nav 2</a>
-        <a href="#">Nav 3</a>
-        <a href="#">Nav 4</a>
-        <a href="#">Nav 5</a>
-      </nav>
-
       <small>&copy; Ryan Buckley</small>
-
     </footer>
 
   </body>
