@@ -11,13 +11,20 @@
       <script type="text/javascript">
         $(function() {
           drawBarChart(
-            [[3, 10, 3, 4, 30], ['three', 'ten', 'three', 'four', 'five-hundred']],
+            //data
+            [[3, 10, 3, 4, 30],
+             ['three', 'ten', 'three', 'four', 'thirty']],
+            //options
             {"barColor": "blue",
-            "barPosition": "bottom",
-            "barSpacing": "15px",
-            "labelColor": "white",
-            "yAxis": "Y Values",
-            "xAxis": "X Values"},
+             "barPosition": "bottom",
+             "barSpacing": "15px",
+             "labelColor": "white",
+             "chartTitle": "Chart Title Goes Here",
+             "titleFontColour": "red",
+             "titleFontSize": "24px",
+             "yAxis": "Y Values",
+             "xAxis": "X Values"},
+            //element
             "graphArea"
           );
         });

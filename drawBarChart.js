@@ -14,6 +14,14 @@ function drawBarChart(data, options, element) {
   let chartHeight = Math.max(...xValues);
   let heightXer = window.innerHeight / chartHeight * .8;
 
+  var node = document.createElement("h1");
+  node.id = "chartTitle";
+  node.style.color = options["titleFontColour"];
+  node.style.fontSize = options["titleFontSize"];
+  node.innerHTML = options["chartTitle"];
+  document.getElementById(element).appendChild(node);
+
+
   var node = document.createElement("div");
   node.id = "barChart";
   node.style.display = "flex";
@@ -21,6 +29,8 @@ function drawBarChart(data, options, element) {
   node.style.justifyContent = "space-evenly";
   node.style.alignItems = "flex-end";
   node.style.margin = "2em";
+  node.style.borderLeft = "dotted";
+  node.style.borderBottom = "dotted";
   document.getElementById(element).appendChild(node);
 
   let barTxtPos;
@@ -72,10 +82,6 @@ function drawBarChart(data, options, element) {
   //X-axis should show labels for each data value
 
   //OPTIONS
-  //chartTitle: should be able to be set and shown dynamically
-  //chartTitleFontSize
-  //chartTitleFontColour
-
   //Multiple Value (Stacked) bar charts. Allow the user to pass multiple values for each bar. Think about how you would need to structure this data compared to a single bar chart.
   //This should also support all the features of the single bar chart, including
     //Customizable bar colours, per value
