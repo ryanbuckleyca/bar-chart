@@ -13,25 +13,52 @@ function drawBarChart(data, options, element) {
   //determine max value, then create multiplier to scale
   let chartHeight = Math.max(...xValues);
   let heightXer = window.innerHeight / chartHeight * .8;
-
-  var node = document.createElement("h1");
+  let node = document.createElement("header");
   node.id = "chartTitle";
   node.style.color = options["titleFontColour"];
   node.style.fontSize = options["titleFontSize"];
+  node.style.textAlign = "center";
   node.innerHTML = options["chartTitle"];
   document.getElementById(element).appendChild(node);
 
+  node = document.createElement("section");
+  node.id = "chartSection";
+  node.style.display = "flex";
+  node.style.flex = "1 1 0%";
+  node.style.flexFlow = "row nowrap";
+  node.style.placeContent = "stretch flex-start";
+  node.style.alignItems = "stretch";
+  document.getElementById(element).appendChild(node);
 
-  var node = document.createElement("div");
+
+  node = document.createElement("figurecaption");
+  node.id = "y-axis";
+  node.style.display = "flex";
+  node.style.justifyContent = "space-evenly";
+  node.style.flexDirection = "column";
+  node.style.alignItems = "flex-end";
+  document.getElementById("chartSection").appendChild(node);
+
+  //add Y ticks (4 could be something more dynamic)
+  let sections = 4;
+  for(let i = 1; i <= sections; i++) {
+    node = document.createElement("div");
+    node.id = "y" + chartHeight / i;
+    node.style.display = "flex";
+    node.style.flexGrow = 1;
+    node.innerHTML = "<p>" + chartHeight / i + " &mdash; </p>";
+    document.getElementById("y-axis").appendChild(node);
+  }
+
+
+  node = document.createElement("figure");
   node.id = "barChart";
   node.style.display = "flex";
   node.style.flexFlow = "row nowrap";
+  node.style.flexGrow = 1;
   node.style.justifyContent = "space-evenly";
   node.style.alignItems = "flex-end";
-  node.style.margin = "2em";
-  node.style.borderLeft = "dotted";
-  node.style.borderBottom = "dotted";
-  document.getElementById(element).appendChild(node);
+  document.getElementById("chartSection").appendChild(node);
 
   let barTxtPos;
   if(options["barPosition"] === "top") {
@@ -47,18 +74,28 @@ function drawBarChart(data, options, element) {
 
     // Create a CONTAINER COLUMN
     // This way there could be multiple bars in a column
-    var node = document.createElement("div");
+    node = document.createElement("div");
     node.id = "bar" + i + "container";
     node.style.display = "flex";
-    node.style.flexDirection = "column";
+    node.style.flexDirection = "column-reverse";
     node.style.flex = 1;
     node.style.margin = 0;
     node.style.padding = 0;
     document.getElementById("barChart").appendChild(node);
 
-  //LOOP
+    //add values to X-Axis
+    node = document.createElement("aside");
+    node.id = "bar" + i + "label";
+    node.style.display = "flex";
+    node.style.flexDirection = "row";
+    node.style.justifyContent = "space-evenly";
+    node.innerHTML = xLabels[i];
+    document.getElementById("bar" + i + "container").appendChild(node);
+
+
+  //LOOP for each stack in multiple-values chart
     // Create each BAR inside
-    var node = document.createElement("div");
+    node = document.createElement("div");
     node.id = "bar" + i;
     node.style.display = "flex";
     node.style.flexDirection = "row";
@@ -71,8 +108,8 @@ function drawBarChart(data, options, element) {
     document.getElementById("bar" + i + "container").appendChild(node);
 
     // Create TEXT
-    var node = document.createElement("p");
-    node.innerHTML = xLabels[i] + " is " + xValues[i];
+    node = document.createElement("p");
+    node.innerHTML = xValues[i];
     document.getElementById("bar" + i).appendChild(node);
   //END LOOP
 
