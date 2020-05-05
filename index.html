@@ -10,12 +10,31 @@
   <body>
       <script type="text/javascript">
         $(function() {
+          // drawBarChart( //first single bar chart
+          //   //data
+          //   [[3, 10, 3, 4, 30],
+          //    ['three', 'ten', 'three', 'four', 'thirty']],
+          //   //options
+          //   {"barColor": "blue",
+          //    "barPosition": "bottom",
+          //    "barSpacing": "15px",
+          //    "labelColor": "white",
+          //    "chartTitle": "Chart Title Goes Here",
+          //    "titleFontColour": "red",
+          //    "titleFontSize": "24px",
+          //    "yAxis": "Y Values",
+          //    "xAxis": "X Values"},
+          //   //element
+          //   "graphArea"
+          // );
           drawBarChart(
             //data
-            [[3, 10, 3, 4, 30],
-             ['three', 'ten', 'three', 'four', 'thirty']],
+            [[2, 1, 21, 15, 6],
+             ['two', 'one', 'twenty-one', 'fifteen', 'six'],
+             [10, 4, 8, 5, 1],
+             ['ten', 'four', 'eight', 'five', 'one']],
             //options
-            {"barColor": "blue",
+            {"barColor": ["blue", "green"],
              "barPosition": "bottom",
              "barSpacing": "15px",
              "labelColor": "white",
@@ -32,7 +51,7 @@
       <section id="graphArea">
         <!-- placeholder -->
       </section>
-    <footer>
+    <footer style="text-align: center;">
       <small>&copy; Ryan Buckley</small>
     </footer>
 
