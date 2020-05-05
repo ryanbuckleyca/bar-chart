@@ -47,6 +47,22 @@ function createHTML(options, element) {
 
 }
 
+//find combined maximum value at each column
+let maxBarHeight = function(data){
+  let valueStack = [];
+  for (each of data[0]) { valueStack.push(0); }
+  //add x-values at each index for each data value array
+  for(let y = 0; y < data.length; y++) {
+    if(y % 2 === 0) {
+      for(let x = 0; x < valueStack.length; x++) {
+        valueStack[x] += data[y][x];
+      }
+    }
+  }
+  return Math.max(...valueStack);
+}
+
+
 //data = the data the chart should work from
 //options = an object which has options for the chart
 //element = a DOM element or jQuery element that the chart will render into
@@ -55,7 +71,6 @@ function drawBarChart(data, options, element) {
   //create the HTML elements into which the graph data will go
   createHTML(options, element);
 
-  let maxValue = 0;
   let labelColor;
   let barColor;
   //for each Chart in Stack:
@@ -68,9 +83,7 @@ function drawBarChart(data, options, element) {
     let xLabels = data[j+1]; //labels
 
     //determine the chart's max value, then create multiplier to scale
-    let chartHeight = Math.max(...xValues);
-    maxValue += chartHeight;
-    let heightXer = window.innerHeight / chartHeight * .8;
+    let heightXer = window.innerHeight / maxBarHeight(data) * .8;
 
     let barTxtPos;
     if(options["barPosition"] === "top") {
@@ -114,7 +127,7 @@ function drawBarChart(data, options, element) {
         node.id = "y" + (i + 1);
         node.style.display = "flex";
         node.style.flexGrow = 1;
-        node.innerHTML = "<p style=\"margin: 0;\">" + Math.round(maxValue / (xValues.length+1) * (i+1)) + " &mdash; </p>";
+        node.innerHTML = "<p style=\"margin: 0;\">" + Math.round(maxBarHeight(data) / (xValues.length+1) * (i+1)) + " &mdash; </p>";
         document.getElementById("y-axis").appendChild(node);
       }
 
