@@ -1,23 +1,57 @@
 // Bar Chart API
 
+function editTitle() {
+  document.getElementById('chartTitle').innerHTML = prompt('Enter a new title for this graph:');
+}
+//find combined maximum value at each column
+let maxBarHeight = function(data){
+  let valueStack = [];
+  for (each of data[0]) { valueStack.push(0); }
+  //add x-values at each index for each data value array
+  for(let y = 0; y < data.length; y++) {
+    if(y % 2 === 0) {
+      for(let x = 0; x < valueStack.length; x++) { valueStack[x] += data[y][x]; }
+    }
+  } return Math.max(...valueStack);
+}
+
 function createHTML(options, element) {
-  let node = document.createElement("header");
+
+  let node = document.createElement("div");
+  node.id = "graphContainer";
+  node.style.display = "table";
+  node.style.margin = "auto";
+  document.getElementById(element).appendChild(node);
+
+  if(options["width"])
+    document.getElementById("graphContainer").style.width = options["width"];
+
+  if(options["height"])
+    document.getElementById("graphContainer").style.height = options["height"];
+
+  node = document.createElement("header");
   node.id = "chartTitle";
   node.style.color = options["titleFontColour"];
+  node.onclick = editTitle;
   node.style.fontSize = options["titleFontSize"];
   node.style.textAlign = "center";
-  node.innerHTML = options["chartTitle"];
-  document.getElementById(element).appendChild(node);
+  if(options["chartTitle"])
+    node.innerHTML = options["chartTitle"];
+  else
+    node.innerHTML = "<em style=\"opacity: 0.5;\">Click here to add title</em>";
+
+  document.getElementById("graphContainer").appendChild(node);
 
   node = document.createElement("section");
   node.id = "chartSection";
   node.style.display = "flex";
   node.style.flex = "1 1 0%";
   node.style.margin = "2em";
+  node.style.fontSize = "1vw";
   node.style.flexFlow = "row nowrap";
   node.style.placeContent = "stretch flex-start";
   node.style.alignItems = "stretch";
-  document.getElementById(element).appendChild(node);
+  document.getElementById("graphContainer").appendChild(node);
 
   node = document.createElement("figurecaption");
   node.id = "y-axis";
@@ -47,22 +81,6 @@ function createHTML(options, element) {
 
 }
 
-//find combined maximum value at each column
-let maxBarHeight = function(data){
-  let valueStack = [];
-  for (each of data[0]) { valueStack.push(0); }
-  //add x-values at each index for each data value array
-  for(let y = 0; y < data.length; y++) {
-    if(y % 2 === 0) {
-      for(let x = 0; x < valueStack.length; x++) {
-        valueStack[x] += data[y][x];
-      }
-    }
-  }
-  return Math.max(...valueStack);
-}
-
-
 //data = the data the chart should work from
 //options = an object which has options for the chart
 //element = a DOM element or jQuery element that the chart will render into
@@ -83,7 +101,11 @@ function drawBarChart(data, options, element) {
     let xLabels = data[j+1]; //labels
 
     //determine the chart's max value, then create multiplier to scale
-    let heightXer = window.innerHeight / maxBarHeight(data) * .8;
+    let heightXer;
+    if(options["height"] == "auto" || null)
+      heightXer = window.innerHeight / maxBarHeight(data) * .8;
+    else
+      heightXer = parseInt(options["height"], 10) / maxBarHeight(data) * .8;
 
     let barTxtPos;
     if(options["barPosition"] === "top") {
@@ -127,7 +149,7 @@ function drawBarChart(data, options, element) {
         node.id = "y" + (i + 1);
         node.style.display = "flex";
         node.style.flexGrow = 1;
-        node.innerHTML = "<p style=\"margin: 0;\">" + Math.round(maxBarHeight(data) / (xValues.length+1) * (i+1)) + " &mdash; </p>";
+        node.innerHTML = "<p style=\"margin: 0; white-space: nowrap;\">" + Math.round(maxBarHeight(data) / (xValues.length+1) * (i+1)) + " &mdash; </p>";
         document.getElementById("y-axis").appendChild(node);
       }
 

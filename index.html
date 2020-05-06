@@ -11,20 +11,22 @@
         $(function() {
           drawBarChart(
             //data
-            [[2, 1, 21, 15, 6],
+            [[20, 10, 210, 150, 60],
              ['tom', 'jim', 'said', 'mustafa', 'xenix'],
-             [10, 4, 8, 5, 1],
+             [100, 40, 80, 50, 10],
              ['jenny', 'sana', 'noelle', 'rhonda', 'iyabo']],
             //options
-            {"chartTitle": "Income per heteronormative couple",
+            {"chartTitle":"",
              "barColor": ["turquoise", "pink"],
              "barPosition": "bottom",
              "barSpacing": "15px",
-             "labelColor": "white",
-             "titleFontColour": "red",
-             "titleFontSize": "24px",
+             "labelColor": ["navy", "maroon"],
+             "titleFontColour": "black",
+             "titleFontSize": "1.4vw",
              "yAxis": "Y Values",
-             "xAxis": "X Values"},
+             "xAxis": "X Values",
+             "width": "400px",
+             "height": "400px"},
             //element
             "graphArea"
           );
