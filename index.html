@@ -3,42 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <title>Bar Chart lighthouse labs project</title>
-    <link rel="stylesheet" href="main.css" />
     <script type="text/javascript" src="drawBarChart.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
   </head>
   <body>
       <script type="text/javascript">
         $(function() {
-          // drawBarChart( //first single bar chart
-          //   //data
-          //   [[3, 10, 3, 4, 30],
-          //    ['three', 'ten', 'three', 'four', 'thirty']],
-          //   //options
-          //   {"barColor": "blue",
-          //    "barPosition": "bottom",
-          //    "barSpacing": "15px",
-          //    "labelColor": "white",
-          //    "chartTitle": "Chart Title Goes Here",
-          //    "titleFontColour": "red",
-          //    "titleFontSize": "24px",
-          //    "yAxis": "Y Values",
-          //    "xAxis": "X Values"},
-          //   //element
-          //   "graphArea"
-          // );
           drawBarChart(
             //data
             [[2, 1, 21, 15, 6],
-             ['two', 'one', 'twenty-one', 'fifteen', 'six'],
+             ['tom', 'jim', 'said', 'mustafa', 'xenix'],
              [10, 4, 8, 5, 1],
-             ['ten', 'four', 'eight', 'five', 'one']],
+             ['jenny', 'sana', 'noelle', 'rhonda', 'iyabo']],
             //options
-            {"barColor": ["blue", "green"],
+            {"chartTitle": "Income per heteronormative couple",
+             "barColor": ["turquoise", "pink"],
              "barPosition": "bottom",
              "barSpacing": "15px",
              "labelColor": "white",
-             "chartTitle": "Chart Title Goes Here",
              "titleFontColour": "red",
              "titleFontSize": "24px",
              "yAxis": "Y Values",

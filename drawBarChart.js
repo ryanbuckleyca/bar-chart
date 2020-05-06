@@ -121,7 +121,7 @@ function drawBarChart(data, options, element) {
         document.getElementById("bar" + i + "container").appendChild(node);
       }
 
-      //on the first go-round, add Y ticks
+      //on the last go-round, add Y ticks
       if(j === (data.length - 2)) {
         node = document.createElement("div");
         node.id = "y" + (i + 1);
@@ -160,12 +160,4 @@ function drawBarChart(data, options, element) {
       document.getElementById("bar" + i + "label").appendChild(node);
     }
   }
-
-  //OPTIONS
-  //Multiple Value (Stacked) bar charts. Allow the user to pass multiple values for each bar. Think about how you would need to structure this data compared to a single bar chart.
-  //This should also support all the features of the single bar chart, including
-    //Customizable bar colours, per value
-    //Customizable label colours
-  //Think about how you would need to structure your data to associate a label to each value
-    //Y-axis should show ticks at certain values
 }
