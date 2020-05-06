@@ -1,13 +1,27 @@
 // Bar Chart API
 
+//TO-DO
+//The following instruction:
+//"Allow the user to pass multiple values for each bar."
+//Makes me think each bar should be its own array
+//i.e. ['label', 23, 12, 4, 21]
+//['x value 2', 44, 2, 232, 77]
+//['Undergrad debt', 23, 42, 58, 65, 23]
+//['PhD debt', 89, 87, 66, 90, 102]
+// This would also allow for variable array lengths
+//If they were single values, it would still work
+//but the code has to be restructured
+
+
 function editTitle() {
   document.getElementById('chartTitle').innerHTML = prompt('Enter a new title for this graph:');
 }
+
 //find combined maximum value at each column
 let maxBarHeight = function(data){
   let valueStack = [];
   for (each of data[0]) { valueStack.push(0); }
-  //add x-values at each index for each data value array
+  //add the x-values at each index for each data value array
   for(let y = 0; y < data.length; y++) {
     if(y % 2 === 0) {
       for(let x = 0; x < valueStack.length; x++) { valueStack[x] += data[y][x]; }
