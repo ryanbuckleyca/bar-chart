@@ -28,6 +28,37 @@ The `options` parameter should be an object which has customizable options for t
 
 The element `parameter` should be a DOM element or jQuery element that the chart will get rendered into.
 
+A complete example of a two-bar chart of the API code could be:
+```javascript
+drawBarChart(
+  //data
+  [[20, 10, 210, 150, 60],
+    ['tom', 'jim', 'said', 'mustafa', 'xenix'],
+    [100, 40, 80, 50, 10],
+    ['jenny', 'sana', 'noelle', 'rhonda', 'iyabo']],
+  //options
+  {"chartTitle":"",
+    "barColor": ["turquoise", "pink"],
+    "barPosition": "bottom",
+    "barSpacing": "15px",
+    "labelColor": ["navy", "maroon"],
+    "titleFontColour": "black",
+    "titleFontSize": "18px",
+    "yAxis": "Y Values",
+    "xAxis": "X Values",
+    "width": "700px",
+    "height": "500px"},
+  //element
+  "graph1"
+);
+```
+where the `element` would be a section of the HTML page such as:
+```html
+<section id="graph1">
+  <!-- placeholder -->
+</section>
+```
+
 Example of single bar chart:
 ![Single Bar Chart](/images/1barchart.png)
 
