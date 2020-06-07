@@ -7,6 +7,8 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
   </head>
   <body>
+    <h1 style="text-align:center">Ryan's barchart exercise page</h1>
+    <hr />
       <script type="text/javascript">
         $(function() {
           drawBarChart(
@@ -22,19 +24,74 @@
              "barSpacing": "15px",
              "labelColor": ["navy", "maroon"],
              "titleFontColour": "black",
-             "titleFontSize": "1.4vw",
+             "titleFontSize": "18px",
              "yAxis": "Y Values",
              "xAxis": "X Values",
              "width": "700px",
              "height": "500px"},
             //element
-            "graphArea"
+            "graph1"
           );
+          drawBarChart(
+            //data
+            [[10, 15, 25],
+             ['nancy', 'asha', 'brooke']],
+            //options
+            {"chartTitle":"",
+             "barColor": "blue",
+             "barPosition": "top",
+             "barSpacing": "20px",
+             "labelColor": "white",
+             "titleFontColour": "#333",
+             "titleFontSize": "16px",
+             "yAxis": "Y Values",
+             "xAxis": "X Values",
+             "width": "500px",
+             "height": "200px"},
+            //element
+            "graph2"
+          );
+          drawBarChart(
+            //data
+            [
+             [72, 10, 18, 55],
+             ['cindy', 'sri', 'hussain', 'mom'],
+             [72, 83, 99, 32],
+             ['ade', 'terceira', 'ryan', 'dad'],
+             [14, 27, 23, 100],
+             ['stephanie', 'elliott', 'nambie', 'cécile']
+            ],
+            //options
+            {"chartTitle":"",
+             "barColor": ["pink", "aqua", "salmon"],
+             "barPosition": "middle",
+             "barSpacing": "10px",
+             "labelColor": ["maroon", "blue", "black"],
+             "titleFontColour": "#131313",
+             "titleFontSize": "20px",
+             "yAxis": "Y Values",
+             "xAxis": "X Values",
+             "width": "600px",
+             "height": "300px"},
+            //element
+            "graph3"
+          );
+
         });
       </script>
-      <section id="graphArea">
+      <section id="graph1">
         <!-- placeholder -->
       </section>
+      <hr />
+      <section id="graph2">
+        <!-- placeholder -->
+      </section>
+      <hr />
+      <section id="graph3">
+        <!-- placeholder -->
+      </section>
+      <hr />
+
     <footer style="text-align: center;">
       <small>&copy; Ryan Buckley</small>
     </footer>

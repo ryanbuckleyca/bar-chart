@@ -1,21 +1,5 @@
 // Bar Chart API
 
-//TO-DO
-//The following instruction:
-//"Allow the user to pass multiple values for each bar."
-//Makes me think each bar should be its own array
-//i.e. ['label', 23, 12, 4, 21]
-//['x value 2', 44, 2, 232, 77]
-//['Undergrad debt', 23, 42, 58, 65, 23]
-//['PhD debt', 89, 87, 66, 90, 102]
-// This would also allow for variable array lengths
-//If they were single values, it would still work
-//...but the code has to be restructured
-
-
-function editTitle() {
-  document.getElementById('chartTitle').innerHTML = prompt('Enter a new title for this graph:');
-}
 
 //find combined maximum value at each column
 let maxBarHeight = function(data){
@@ -31,20 +15,26 @@ let maxBarHeight = function(data){
 
 function createHTML(options, element) {
 
+  function editTitle() {
+    let titleSet = prompt('Enter a new title for this graph:');
+    if(titleSet === "") { titleSet = "<em style=\"opacity: 0.5;\">Click here to add title</em>" }
+    document.getElementById(element + '-chartTitle').innerHTML = titleSet;
+  }
+
   let node = document.createElement("div");
-  node.id = "graphContainer";
+  node.id = element + "-graphContainer";
   node.style.display = "table";
   node.style.margin = "auto";
   document.getElementById(element).appendChild(node);
 
   if(options["width"])
-    document.getElementById("graphContainer").style.width = options["width"];
+    document.getElementById(element + "-graphContainer").style.width = options["width"];
 
   if(options["height"])
-    document.getElementById("graphContainer").style.height = options["height"];
+    document.getElementById(element + "-graphContainer").style.height = options["height"];
 
   node = document.createElement("header");
-  node.id = "chartTitle";
+  node.id = element + "-chartTitle";
   node.style.color = options["titleFontColour"];
   node.onclick = editTitle;
   node.style.fontSize = options["titleFontSize"];
@@ -54,44 +44,44 @@ function createHTML(options, element) {
   else
     node.innerHTML = "<em style=\"opacity: 0.5;\">Click here to add title</em>";
 
-  document.getElementById("graphContainer").appendChild(node);
+  document.getElementById(element + "-graphContainer").appendChild(node);
 
   node = document.createElement("section");
-  node.id = "chartSection";
+  node.id = element + "-chartSection";
   node.style.display = "flex";
   node.style.flex = "1 1 0%";
   node.style.margin = "2em";
-  node.style.fontSize = "1vw";
+  node.style.fontSize = "12px";
   node.style.flexFlow = "row nowrap";
   node.style.placeContent = "stretch flex-start";
   node.style.alignItems = "stretch";
-  document.getElementById("graphContainer").appendChild(node);
+  document.getElementById(element + "-graphContainer").appendChild(node);
 
   node = document.createElement("figurecaption");
-  node.id = "y-axis";
+  node.id = element + "-yaxis";
   node.style.display = "flex";
   node.style.justifyContent = "space-evenly";
   node.style.flexDirection = "column-reverse";
   node.style.alignItems = "flex-end";
-  document.getElementById("chartSection").appendChild(node);
+  document.getElementById(element + "-chartSection").appendChild(node);
 
   //add 0th Y ticks
   node = document.createElement("div");
-  node.id = "y0";
+  node.id = element + "-y0";
   node.style.display = "flex";
   node.style.flexGrow = 0;
   node.innerHTML = "<p style=\"margin: 0;\">&nbsp;</p>";
-  document.getElementById("y-axis").appendChild(node);
+  document.getElementById(element + "-yaxis").appendChild(node);
 
   node = document.createElement("figure");
-  node.id = "barChart";
+  node.id = element + "-barChart";
   node.style.display = "flex";
   node.style.flexFlow = "row nowrap";
   node.style.flexGrow = 1;
   node.style.margin = 0;
   node.style.justifyContent = "space-evenly";
   node.style.alignItems = "flex-end";
-  document.getElementById("chartSection").appendChild(node);
+  document.getElementById(element + "-chartSection").appendChild(node);
 
 }
 
@@ -138,33 +128,33 @@ function drawBarChart(data, options, element) {
         // Create a CONTAINER COLUMN
         // This way there could be multiple bars in a column
         node = document.createElement("div");
-        node.id = "bar" + i + "container";
+        node.id = element + "-bar" + i + "container";
         node.style.display = "flex";
         node.style.flexDirection = "column-reverse";
         node.style.flex = 1;
         node.style.margin = 0;
         node.style.padding = 0;
-        document.getElementById("barChart").appendChild(node);
+        document.getElementById(element + "-barChart").appendChild(node);
 
         //Create LABEL ELEMENT in X-Axis
         node = document.createElement("aside");
-        node.id = "bar" + i + "label";
+        node.id = element + "-bar" + i + "label";
         node.style.display = "flex";
         node.style.flexDirection = "column-reverse";
         node.style.marginRight = options["barSpacing"];
         node.style.justifyContent = "space-evenly";
         node.style.alignItems = "center";
-        document.getElementById("bar" + i + "container").appendChild(node);
+        document.getElementById(element + "-bar" + i + "container").appendChild(node);
       }
 
       //on the last go-round, add Y ticks
       if(j === (data.length - 2)) {
         node = document.createElement("div");
-        node.id = "y" + (i + 1);
+        node.id = element + "-y" + (i + 1);
         node.style.display = "flex";
         node.style.flexGrow = 1;
         node.innerHTML = "<p style=\"margin: 0; white-space: nowrap;\">" + Math.round(maxBarHeight(data) / (xValues.length+1) * (i+1)) + " &mdash; </p>";
-        document.getElementById("y-axis").appendChild(node);
+        document.getElementById(element + "-yaxis").appendChild(node);
       }
 
       Array.isArray(options["barColor"]) ? barColor = options["barColor"][j/2] : barColor = options["barColor"];
@@ -172,7 +162,7 @@ function drawBarChart(data, options, element) {
 
       // Create each BAR inside
       node = document.createElement("div");
-      node.id = "bar" + i + j;
+      node.id = element + "-bar" + i + j;
       node.style.display = "flex";
       node.style.flexDirection = "row";
       node.style.justifyContent = "space-evenly";
@@ -181,19 +171,19 @@ function drawBarChart(data, options, element) {
       node.style.height = barHeight + "px";
       node.style.marginRight = options["barSpacing"];
       node.style.color = labelColor;
-      document.getElementById("bar" + i + "container").appendChild(node);
+      document.getElementById(element + "-bar" + i + "container").appendChild(node);
 
       // Create TEXT inside of BAR
       node = document.createElement("p");
       node.style.margin = "0px";
       node.innerHTML = xValues[i];
-      document.getElementById("bar" + i + j).appendChild(node);
+      document.getElementById(element + "-bar" + i + j).appendChild(node);
 
       // Create TEXT inside of X-label
       node = document.createElement("p");
       node.style.margin = "0px";
       node.innerHTML = xLabels[i];
-      document.getElementById("bar" + i + "label").appendChild(node);
+      document.getElementById(element + "-bar" + i + "label").appendChild(node);
     }
   }
 }
