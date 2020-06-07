@@ -10,7 +10,7 @@
 //['PhD debt', 89, 87, 66, 90, 102]
 // This would also allow for variable array lengths
 //If they were single values, it would still work
-//but the code has to be restructured
+//...but the code has to be restructured
 
 
 function editTitle() {
