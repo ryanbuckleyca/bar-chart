@@ -35,7 +35,7 @@ Example of double bar chart:
 ![Double Bar Chart](/images/2barchart.png)
 
 Example of tripple bar chart:
-![Tripple Bar Chart](/images/2barchart.png)
+![Tripple Bar Chart](/images/3barchart.png)
 
 ## Known Issues / Bugs
 
