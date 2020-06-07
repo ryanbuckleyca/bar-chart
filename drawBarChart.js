@@ -17,8 +17,9 @@ function createHTML(options, element) {
 
   function editTitle() {
     let titleSet = prompt('Enter a new title for this graph:');
-    if(titleSet === "") { titleSet = "<em style=\"opacity: 0.5;\">Click here to add title</em>" }
+    if(titleSet === "") { titleSet = "<title class=\"pending\">Click here to add title</title>" }
     document.getElementById(element + '-chartTitle').innerHTML = titleSet;
+    document.getElementById(element + '-chartTitle').removeAttribute(className);
   }
 
   let node = document.createElement("div");
@@ -36,33 +37,21 @@ function createHTML(options, element) {
   node = document.createElement("header");
   node.id = element + "-chartTitle";
   node.style.color = options["titleFontColour"];
-  node.onclick = editTitle;
   node.style.fontSize = options["titleFontSize"];
-  node.style.textAlign = "center";
+  node.onclick = editTitle;
   if(options["chartTitle"])
     node.innerHTML = options["chartTitle"];
   else
-    node.innerHTML = "<em style=\"opacity: 0.5;\">Click here to add title</em>";
+    node.innerHTML = "<title class=\"pending\">Click here to add title</title>";
 
   document.getElementById(element + "-graphContainer").appendChild(node);
 
   node = document.createElement("section");
   node.id = element + "-chartSection";
-  node.style.display = "flex";
-  node.style.flex = "1 1 0%";
-  node.style.margin = "2em";
-  node.style.fontSize = "12px";
-  node.style.flexFlow = "row nowrap";
-  node.style.placeContent = "stretch flex-start";
-  node.style.alignItems = "stretch";
   document.getElementById(element + "-graphContainer").appendChild(node);
 
   node = document.createElement("figurecaption");
   node.id = element + "-yaxis";
-  node.style.display = "flex";
-  node.style.justifyContent = "space-evenly";
-  node.style.flexDirection = "column-reverse";
-  node.style.alignItems = "flex-end";
   document.getElementById(element + "-chartSection").appendChild(node);
 
   //add 0th Y ticks
@@ -75,12 +64,6 @@ function createHTML(options, element) {
 
   node = document.createElement("figure");
   node.id = element + "-barChart";
-  node.style.display = "flex";
-  node.style.flexFlow = "row nowrap";
-  node.style.flexGrow = 1;
-  node.style.margin = 0;
-  node.style.justifyContent = "space-evenly";
-  node.style.alignItems = "flex-end";
   document.getElementById(element + "-chartSection").appendChild(node);
 
 }
@@ -97,20 +80,15 @@ function drawBarChart(data, options, element) {
   let barColor;
   //for each Chart in Stack:
   for(let j = 0; j < data.length; j += 2) {
-
-    //data is an array of arrays
-    //first set is values, followed by labels
-    //i.e. [1, 2, 3, 4, 5], ['one', 'two', 'three', 'four', 'five']
+    //data is an array of arrays. first set is values, followed by labels -- i.e. [1, 2, 3, 4, 5], ['one', 'two', 'three', 'four', 'five']
     let xValues = data[j]; //values
     let xLabels = data[j+1]; //labels
-
     //determine the chart's max value, then create multiplier to scale
     let heightXer;
     if(options["height"] == "auto" || null)
       heightXer = window.innerHeight / maxBarHeight(data) * .8;
     else
       heightXer = parseInt(options["height"], 10) / maxBarHeight(data) * .8;
-
     let barTxtPos;
     if(options["barPosition"] === "top") {
       barTxtPos = "flex-start";
@@ -119,7 +97,6 @@ function drawBarChart(data, options, element) {
     } else {
       barTxtPos = "center";
     }
-
     //for each X-Value, do something:
     for(let i = 0; i < xValues.length; i++) {
       let barHeight = data[j][i] * heightXer;
@@ -129,21 +106,14 @@ function drawBarChart(data, options, element) {
         // This way there could be multiple bars in a column
         node = document.createElement("div");
         node.id = element + "-bar" + i + "container";
-        node.style.display = "flex";
-        node.style.flexDirection = "column-reverse";
-        node.style.flex = 1;
-        node.style.margin = 0;
-        node.style.padding = 0;
+        node.className = "barContainer";
         document.getElementById(element + "-barChart").appendChild(node);
 
         //Create LABEL ELEMENT in X-Axis
         node = document.createElement("aside");
         node.id = element + "-bar" + i + "label";
-        node.style.display = "flex";
-        node.style.flexDirection = "column-reverse";
+        node.className = "barLabel";
         node.style.marginRight = options["barSpacing"];
-        node.style.justifyContent = "space-evenly";
-        node.style.alignItems = "center";
         document.getElementById(element + "-bar" + i + "container").appendChild(node);
       }
 
@@ -163,14 +133,12 @@ function drawBarChart(data, options, element) {
       // Create each BAR inside
       node = document.createElement("div");
       node.id = element + "-bar" + i + j;
-      node.style.display = "flex";
-      node.style.flexDirection = "row";
-      node.style.justifyContent = "space-evenly";
+      node.className = "bar";
       node.style.alignItems = barTxtPos;
       node.style.background = barColor;
       node.style.height = barHeight + "px";
-      node.style.marginRight = options["barSpacing"];
       node.style.color = labelColor;
+      node.style.marginRight = options["barSpacing"];
       document.getElementById(element + "-bar" + i + "container").appendChild(node);
 
       // Create TEXT inside of BAR
