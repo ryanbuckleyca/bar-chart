@@ -47,12 +47,12 @@ Would be great to have animations
 
 ## External resources
 
-http://www.w3schools.com/
-https://guides.github.com/features/mastering-markdown/
-http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf
-https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-https://www.qhmit.com/css/flexbox/tutorial/nested_flex_containers.cfm
-https://stackoverflow.com/questions/43520932/make-flex-grow-expand-items-based-on-their-original-size
+* http://www.w3schools.com/
+* https://guides.github.com/features/mastering-markdown/
+* http://rogerdudler.github.io/git-guide/files/git_cheat_sheet.pdf
+* https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+* https://www.qhmit.com/css/flexbox/tutorial/nested_flex_containers.cfm
+* https://stackoverflow.com/questions/43520932/make-flex-grow-expand-items-based-on-their-original-size
 
 ## Acknowledgements
 
