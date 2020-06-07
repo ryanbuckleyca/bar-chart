@@ -10,8 +10,8 @@ The `data` parameter will be the data the chart should work from Start with just
 e.g. `[1, 2, 3, 4, 5]`
 
 The `options` parameter should be an object which has customizable options for the chart. Bar sizes will be dependent on the data that gets passed in. Bar width is dependent on the total amount of values passed, and bar height is dependent on the values of the data. The customizable properties are are follows:
-i.e. `{`
-``  "chartTitle": "", //title can be set and shown dynamically
+`{
+  "chartTitle": "", //title can be set and shown dynamically
   "barColor": ["turquoise", "pink"], //single value or array
   "barPosition": "bottom", //top, center, or bottom
   "barSpacing": "15px",
@@ -21,8 +21,8 @@ i.e. `{`
   "yAxis": "Y Values",
   "xAxis": "X Values",
   "width": "700px",
-  "height": "500px" ``
-`}`
+  "height": "500px"
+}`
 
 The element `parameter` should be a DOM element or jQuery element that the chart will get rendered into.
 
